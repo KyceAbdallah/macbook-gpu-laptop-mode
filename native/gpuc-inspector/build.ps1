@@ -22,7 +22,7 @@ $batch = Join-Path $outDir "build.cmd"
 @echo off
 call "$vcvars"
 if errorlevel 1 exit /b %errorlevel%
-cl /nologo /std:c++17 /EHsc /W4 /DUNICODE /D_UNICODE "$source" /Fe"$exe" setupapi.lib cfgmgr32.lib user32.lib
+cl /nologo /std:c++17 /EHsc /W4 /DUNICODE /D_UNICODE "$source" /Fe"$exe" setupapi.lib cfgmgr32.lib user32.lib wbemuuid.lib ole32.lib oleaut32.lib
 exit /b %errorlevel%
 "@ | Set-Content -Path $batch -Encoding ASCII
 
