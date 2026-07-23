@@ -1,0 +1,5 @@
+captures/
+tools/
+secrets/
+.env.local
+*.log
