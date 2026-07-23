@@ -1,0 +1,39 @@
+{
+  "packageName": "gpuc-readonly",
+  "targetHardwareId": "ACPI\\APP000B",
+  "configuration": "Release",
+  "safetyBoundary": {
+    "catalogGenerated": false,
+    "signed": false,
+    "testModeEnabled": false,
+    "staged": false,
+    "installed": false,
+    "driverLoaded": false,
+    "mmioReadEnabled": false,
+    "muxWriteEnabled": false
+  },
+  "files": [
+    {
+      "role": "inf",
+      "path": "driver/gpuc-readonly/gpuc-readonly.inf",
+      "sha256": "<fill-after-audit>"
+    },
+    {
+      "role": "sys",
+      "path": "driver/gpuc-readonly/x64/Release/gpuc-readonly.sys",
+      "sha256": "<fill-after-build>"
+    },
+    {
+      "role": "cat",
+      "path": "driver/gpuc-readonly/gpuc-readonly.cat",
+      "sha256": "<fill-only-after-catalog-generation>"
+    }
+  ],
+  "audit": {
+    "forbiddenDefinesAbsent": [
+      "GPUC_ENABLE_REPORTED_RESOURCE_READ"
+    ],
+    "broadHardwareMatchesAbsent": true,
+    "allowedPackagePayloadOnly": true
+  }
+}

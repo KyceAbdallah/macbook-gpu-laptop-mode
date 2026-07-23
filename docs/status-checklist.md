@@ -29,6 +29,8 @@ Updated: 2026-07-23 01:04:05 -04:00
 - [x] Added a dry-run-first user-mode orchestrator prototype for app GPU preferences and power policy.
 - [x] Added profile input for repeatable user-mode orchestration plans.
 - [x] Added a read-only GPU process watcher for dGPU wake troubleshooting.
+- [x] Hardened package audit for forbidden compile flags.
+- [x] Added package manifest template.
 
 ## Current Verified Safety Boundary
 
@@ -57,9 +59,9 @@ The build artifact is local output only and is ignored by git.
 
 ## Needs To Be Done
 
-- [ ] Make `audit-package.ps1` stricter by failing on forbidden compile flags such as `GPUC_ENABLE_REPORTED_RESOURCE_READ`.
-- [ ] Make `audit-package.ps1` list the exact files allowed in any future package.
-- [ ] Add a package manifest template that records INF/SYS/CAT hashes without committing generated binaries.
+- [x] Make `audit-package.ps1` stricter by failing on forbidden compile flags such as `GPUC_ENABLE_REPORTED_RESOURCE_READ`.
+- [x] Make `audit-package.ps1` list the exact files allowed in any future package.
+- [x] Add a package manifest template that records INF/SYS/CAT hashes without committing generated binaries.
 - [ ] Decide whether to allow catalog generation as a separate risk gate.
 - [ ] If catalog generation is approved, generate only the catalog and record its hash; do not sign or install yet.
 - [ ] Decide whether local test signing is acceptable given anti-cheat/Test Mode tradeoffs.

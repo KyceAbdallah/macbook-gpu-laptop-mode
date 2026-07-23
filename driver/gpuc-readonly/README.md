@@ -45,6 +45,7 @@ Compatible ID: gpuc
 - `gpuc-readonly.vcxproj.filters`: Visual Studio filter layout.
 - `build-driver.ps1`: guarded build/check script.
 - `audit-package.ps1`: non-mutating package audit script.
+- `package-manifest.template.json`: hash manifest template for future package gates.
 - `driver.c`: KMDF entry and device setup skeleton.
 - `queue.c`: read-only IOCTL dispatch skeleton.
 - `gpuc-readonly.h`: internal driver definitions.
