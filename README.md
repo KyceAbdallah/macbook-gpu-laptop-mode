@@ -23,6 +23,7 @@ This project starts in user mode:
 
 ## Current Artifacts
 
+- `docs/status-checklist.md`: current public-safe completed/remaining work checklist.
 - `scripts/get-gpu-laptop-mode-state.ps1`: public-safe PowerShell state reporter.
 - `scripts/check-driver-preinstall.ps1`: parameterized non-mutating preinstall checker.
 - `scripts/restore-driver-binding.ps1`: parameterized rollback helper; dry-run unless `-Execute` is supplied.
