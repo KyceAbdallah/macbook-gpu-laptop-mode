@@ -12,22 +12,36 @@ $msbuild = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Curren
 $sdkVersion = "10.0.26100.0"
 $sdkInclude = "C:\Program Files (x86)\Windows Kits\10\Include\$sdkVersion\km"
 $sdkLib = "C:\Program Files (x86)\Windows Kits\10\Lib\$sdkVersion\km\x64"
-$driverTargets = Get-ChildItem "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild" -Recurse -Filter "Microsoft.DriverKit*.targets" -ErrorAction SilentlyContinue | Select-Object -First 1
+$kernelToolset = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Platforms\x64\PlatformToolsets\WindowsKernelModeDriver10.0"
+$userToolset = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Platforms\x64\PlatformToolsets\WindowsUserModeDriver10.0"
+$wdfHeader = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10" -Recurse -Filter "wdf.h" -ErrorAction SilentlyContinue | Select-Object -First 1
+$wdfEntryLib = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10" -Recurse -Filter "WdfDriverEntry.lib" -ErrorAction SilentlyContinue | Select-Object -First 1
 
 $checks = [ordered]@{
     Project = (Test-Path $project)
     MSBuild = (Test-Path $msbuild)
+    KernelToolset = (Test-Path $kernelToolset)
+    UserModeDriverToolset = (Test-Path $userToolset)
     KernelHeaders = (Test-Path $sdkInclude)
     KernelLibs = (Test-Path $sdkLib)
-    DriverTargets = ($null -ne $driverTargets)
+    WdfHeader = ($null -ne $wdfHeader)
+    WdfEntryLib = ($null -ne $wdfEntryLib)
 }
 
 foreach ($item in $checks.GetEnumerator()) {
     Write-Output ("{0}: {1}" -f $item.Key, $item.Value)
 }
 
-if ($driverTargets) {
-    Write-Output ("DriverTargetsPath: " + $driverTargets.FullName)
+if (Test-Path $kernelToolset) {
+    Write-Output ("KernelToolsetPath: " + $kernelToolset)
+}
+
+if ($wdfHeader) {
+    Write-Output ("WdfHeaderPath: " + $wdfHeader.FullName)
+}
+
+if ($wdfEntryLib) {
+    Write-Output ("WdfEntryLibPath: " + $wdfEntryLib.FullName)
 }
 
 if ($CheckOnly) {

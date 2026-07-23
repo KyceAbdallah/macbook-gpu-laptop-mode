@@ -71,11 +71,20 @@ Current known prerequisite shape on the first lab machine:
 ```text
 MSBuild: present
 Windows SDK 10.0.26100.0 user-mode headers/libs: present
+VS driver platform toolsets: present after installing Windows Driver Kit component
 WDK kernel headers/libs: not present
-WDK DriverKit MSBuild targets: not present
 ```
 
-That means the scaffold can be reviewed, but the driver cannot be compiled on that machine until the WDK driver workload is installed.
+That means the scaffold can be reviewed, but the driver cannot be compiled on that machine until the standalone WDK kit payload is installed. The Visual Studio component can add project/toolset integration without placing `wdf.h` and `WdfDriverEntry.lib` under the Windows Kits tree.
+
+Known missing payload evidence:
+
+```text
+wdf.h
+WdfDriverEntry.lib
+Windows Kits\10\Include\<version>\km
+Windows Kits\10\Lib\<version>\km\x64
+```
 
 ## Install Status
 
