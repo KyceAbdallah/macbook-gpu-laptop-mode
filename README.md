@@ -50,3 +50,4 @@ The scripts in this repo are intended to be read-only. They should not change di
 Before any future kernel or mux-control work, use a private lab repo and document recovery paths first.
 
 See `docs/preinstall-package-review.md` before considering any driver package install path.
+See `docs/signed-test-package-plan.md` before considering any catalog/signing path.

@@ -44,6 +44,7 @@ Compatible ID: gpuc
 - `gpuc-readonly.vcxproj`: WDK project scaffold.
 - `gpuc-readonly.vcxproj.filters`: Visual Studio filter layout.
 - `build-driver.ps1`: guarded build/check script.
+- `audit-package.ps1`: non-mutating package audit script.
 - `driver.c`: KMDF entry and device setup skeleton.
 - `queue.c`: read-only IOCTL dispatch skeleton.
 - `gpuc-readonly.h`: internal driver definitions.
@@ -63,6 +64,12 @@ Attempt a local WDK build only after the check passes:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\driver\gpuc-readonly\build-driver.ps1 -Configuration Release
+```
+
+Audit the compile-only package shape:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\driver\gpuc-readonly\audit-package.ps1
 ```
 
 If the WDK driver targets are missing, install the matching WDK/Visual Studio driver workload and rerun `-CheckOnly`.
