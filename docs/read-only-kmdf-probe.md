@@ -158,3 +158,24 @@ Before any driver build/install work:
 5. Install only on a controlled test environment.
 6. Run inventory-only IOCTLs.
 7. Consider a bounded read of the reported resource.
+
+## Scaffold Status
+
+The public repo now contains a source scaffold only:
+
+```text
+shared/gpuc-ioctl.h
+driver/gpuc-readonly/
+native/gpuc-kmdf-client/
+```
+
+Current scaffold boundaries:
+
+- the INF is review-only,
+- no WDK project is provided yet,
+- no install script is provided,
+- the user-mode client can be built independently,
+- the client reports a missing interface until a driver is intentionally installed in a controlled test environment,
+- no expanded 16-byte read command exists.
+
+The user-mode client build validates the shared IOCTL header, but does not validate the KMDF driver build.

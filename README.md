@@ -21,6 +21,14 @@ This project starts in user mode:
 - record public-safe summaries,
 - avoid kernel drivers, mux writes, and registry mutation until the platform behavior is understood.
 
+## Current Artifacts
+
+- `scripts/get-gpu-laptop-mode-state.ps1`: public-safe PowerShell state reporter.
+- `native/gpuc-inspector/`: no-write native user-mode inspector.
+- `driver/gpuc-readonly/`: review-only KMDF source scaffold.
+- `native/gpuc-kmdf-client/`: user-mode client scaffold for a future installed probe.
+- `shared/gpuc-ioctl.h`: shared read-only IOCTL contract.
+
 ## Privacy Model
 
 Do not commit local captures. Diagnostic output can contain machine names, device instance IDs, driver inventory, registry data, and other fingerprints.
