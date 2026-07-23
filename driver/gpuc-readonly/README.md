@@ -40,6 +40,9 @@ Compatible ID: gpuc
 ## Files
 
 - `gpuc-readonly.inf`: draft INF for review only.
+- `gpuc-readonly.vcxproj`: WDK project scaffold.
+- `gpuc-readonly.vcxproj.filters`: Visual Studio filter layout.
+- `build-driver.ps1`: guarded build/check script.
 - `driver.c`: KMDF entry and device setup skeleton.
 - `queue.c`: read-only IOCTL dispatch skeleton.
 - `gpuc-readonly.h`: internal driver definitions.
@@ -47,7 +50,32 @@ Compatible ID: gpuc
 
 ## Build Status
 
-No build project is provided yet. Add the WDK project only after the INF and rollback path have been reviewed.
+The project is build-only. The script does not install, sign, create a service, enable Test Mode, or load a driver.
+
+Check local prerequisites:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\driver\gpuc-readonly\build-driver.ps1 -CheckOnly
+```
+
+Attempt a local WDK build only after the check passes:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\driver\gpuc-readonly\build-driver.ps1 -Configuration Release
+```
+
+If the WDK driver targets are missing, install the matching WDK/Visual Studio driver workload and rerun `-CheckOnly`.
+
+Current known prerequisite shape on the first lab machine:
+
+```text
+MSBuild: present
+Windows SDK 10.0.26100.0 user-mode headers/libs: present
+WDK kernel headers/libs: not present
+WDK DriverKit MSBuild targets: not present
+```
+
+That means the scaffold can be reviewed, but the driver cannot be compiled on that machine until the WDK driver workload is installed.
 
 ## Install Status
 

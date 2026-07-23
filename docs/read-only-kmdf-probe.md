@@ -183,3 +183,20 @@ Current scaffold boundaries:
 - no expanded 16-byte read command exists.
 
 The user-mode client build validates the shared IOCTL header, but does not validate the KMDF driver build.
+
+## WDK Build Scaffold
+
+The driver folder includes a WDK project scaffold and guarded build script:
+
+```text
+driver/gpuc-readonly/gpuc-readonly.vcxproj
+driver/gpuc-readonly/build-driver.ps1
+```
+
+The script supports a non-mutating prerequisite check:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\driver\gpuc-readonly\build-driver.ps1 -CheckOnly
+```
+
+The script does not install, sign, enable Test Mode, create a service, or load a driver.
