@@ -25,6 +25,10 @@ Updated: 2026-07-23 01:04:05 -04:00
 - [x] Added a signed test package plan.
 - [x] Added a non-mutating package audit script.
 - [x] Verified the package audit passes without catalog generation, signing, staging, install, service creation, driver load, or binding.
+- [x] Added a user-mode capability audit.
+- [x] Added a dry-run-first user-mode orchestrator prototype for app GPU preferences and power policy.
+- [x] Added profile input for repeatable user-mode orchestration plans.
+- [x] Added a read-only GPU process watcher for dGPU wake troubleshooting.
 
 ## Current Verified Safety Boundary
 
@@ -63,3 +67,6 @@ The build artifact is local output only and is ignored by git.
 - [ ] Only after a fresh preinstall check and rollback dry-run, decide whether to stage/install on a controlled test path.
 - [ ] After any future installed read-only probe, use the KMDF client to validate version/resources/counters only.
 - [ ] Keep mux-control, EC writes, and MMIO reads/writes out of scope until inventory-only driver behavior is validated.
+- [x] Build reusable user-mode app preference profiles.
+- [x] Add dGPU wake/process monitoring for laptop-mode troubleshooting.
+- [ ] Decide whether user-mode-only automation is useful as a partial solution despite not proving panel-owner switching.

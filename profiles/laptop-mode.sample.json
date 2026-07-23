@@ -1,0 +1,10 @@
+{
+  "preferIntegratedFor": [
+    "C:\\Users\\example\\AppData\\Roaming\\Spotify\\Spotify.exe"
+  ],
+  "preferHighPerformanceFor": [
+    "C:\\Games\\ExampleGame\\Game.exe"
+  ],
+  "removePreferenceFor": [],
+  "batterySaverPlan": false
+}

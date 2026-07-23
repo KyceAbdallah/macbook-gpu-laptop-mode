@@ -25,6 +25,10 @@ This project starts in user mode:
 
 - `docs/status-checklist.md`: current public-safe completed/remaining work checklist.
 - `scripts/get-gpu-laptop-mode-state.ps1`: public-safe PowerShell state reporter.
+- `scripts/test-user-mode-laptop-mode.ps1`: read-only user-mode capability audit.
+- `scripts/invoke-user-mode-laptop-mode.ps1`: dry-run-first user-mode orchestration prototype for app GPU preferences and power policy.
+- `scripts/watch-gpu-processes.ps1`: read-only GPU Engine process sampler for dGPU wake troubleshooting.
+- `profiles/laptop-mode.sample.json`: sample profile for the user-mode orchestrator.
 - `scripts/check-driver-preinstall.ps1`: parameterized non-mutating preinstall checker.
 - `scripts/restore-driver-binding.ps1`: parameterized rollback helper; dry-run unless `-Execute` is supplied.
 - `native/gpuc-inspector/`: no-write native user-mode inspector.
