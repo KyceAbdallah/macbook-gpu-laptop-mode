@@ -50,7 +50,7 @@ Compatible ID: gpuc
 
 ## Build Status
 
-The project is build-only. The script does not install, sign, create a service, enable Test Mode, or load a driver.
+The project is build-only. The script does not install, sign, create a service, enable Test Mode, or load a driver. The scaffold targets desktop Windows and disables package/signing/API-validation steps for the compile-only path.
 
 Check local prerequisites:
 
