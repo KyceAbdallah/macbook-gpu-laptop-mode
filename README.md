@@ -24,6 +24,8 @@ This project starts in user mode:
 ## Current Artifacts
 
 - `scripts/get-gpu-laptop-mode-state.ps1`: public-safe PowerShell state reporter.
+- `scripts/check-driver-preinstall.ps1`: parameterized non-mutating preinstall checker.
+- `scripts/restore-driver-binding.ps1`: parameterized rollback helper; dry-run unless `-Execute` is supplied.
 - `native/gpuc-inspector/`: no-write native user-mode inspector.
 - `driver/gpuc-readonly/`: review-only KMDF source scaffold.
 - `native/gpuc-kmdf-client/`: user-mode client scaffold for a future installed probe.
@@ -46,3 +48,5 @@ This public repo intentionally excludes:
 The scripts in this repo are intended to be read-only. They should not change display state, drivers, registry values, or firmware/mux state.
 
 Before any future kernel or mux-control work, use a private lab repo and document recovery paths first.
+
+See `docs/preinstall-package-review.md` before considering any driver package install path.
