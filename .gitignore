@@ -3,3 +3,5 @@ tools/
 secrets/
 .env.local
 *.log
+native/**/bin/
+native/**/*.obj
