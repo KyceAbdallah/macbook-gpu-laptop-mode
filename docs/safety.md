@@ -30,3 +30,28 @@ Do not publish raw captures by default. Treat these as potentially sensitive:
 - full driver inventories,
 - ACPI dumps tied to a specific personal machine,
 - logs containing usernames or installed application paths.
+
+## Driver Recovery Preflight
+
+Before replacing a null-function ACPI binding with any experimental KMDF driver, prepare rollback first.
+
+Minimum public-safe checklist:
+
+1. Capture the current PnP identity and driver binding.
+2. Export the currently bound driver package.
+3. Save the target device instance ID.
+4. Save the original INF name, provider, class, version, signer, and install section.
+5. Confirm Safe Mode or Windows Recovery Environment access.
+6. Confirm an external display path if the experiment can affect panel routing.
+7. Keep rollback commands in a local/private note before installing anything.
+
+Typical capture commands:
+
+```powershell
+Get-PnpDevice -InstanceId '<device-instance-id>' | Format-List *
+Get-PnpDeviceProperty -InstanceId '<device-instance-id>' | Sort-Object KeyName | Format-List KeyName,Type,Data
+pnputil /enum-drivers /files
+pnputil /export-driver <published-inf-name> <private-backup-folder>
+```
+
+Do not publish full outputs from those commands without review. They can contain machine-specific IDs and driver inventory.
