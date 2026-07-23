@@ -12,6 +12,7 @@ typedef struct _GPUC_RESOURCE_ENTRY {
     PHYSICAL_ADDRESS RawStart;
     PHYSICAL_ADDRESS TranslatedStart;
     SIZE_T Length;
+    ULONG Flags;
     BOOLEAN Mapped;
     volatile UCHAR* MappedBase;
 } GPUC_RESOURCE_ENTRY;

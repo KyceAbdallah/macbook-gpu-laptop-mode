@@ -65,15 +65,17 @@ For each memory resource:
 
 The current public hypothesis is that this class of Apple mux exposes a tiny MMIO resource whose base is sufficient to identify a T2-style gmux window. Linux-derived behavior indicates the MMIO command protocol may use offsets beyond an 8-byte ACPI-declared allocation, so the first Windows probe should only use the resource length Windows reports.
 
-Initial policy:
+Initial scaffold policy:
 
 ```text
-Map only the exact Windows-reported resource length.
-Read only.
-No speculative 16-byte mapping in phase 1.
+Inventory only.
+Record raw and translated resources.
+Do not map MMIO by default.
+Do not read resource bytes by default.
+No speculative 16-byte mapping.
 ```
 
-An expanded 16-byte read can be designed later as a separate opt-in experiment if the private evidence supports it.
+A reported-resource byte read can be enabled later with an explicit compile-time lab flag after inventory IOCTLs are validated. An expanded 16-byte read can be designed later as a separate opt-in experiment if the private evidence supports it.
 
 ## IOCTL Contract
 
@@ -117,10 +119,11 @@ The user-mode tool should:
 - optionally perform one bounded read of the reported resource,
 - save Markdown and JSON reports.
 
-The tool should require an explicit flag before any MMIO byte read:
+The tool should require an explicit flag before any MMIO byte read, and the driver must be built with the matching lab opt-in:
 
 ```text
 gpuc-kmdf-client.exe --read-reported-resource
+GPUC_ENABLE_REPORTED_RESOURCE_READ
 ```
 
 Default run should inventory only.
@@ -176,6 +179,7 @@ Current scaffold boundaries:
 - no install script is provided,
 - the user-mode client can be built independently,
 - the client reports a missing interface until a driver is intentionally installed in a controlled test environment,
+- the driver scaffold records resources but does not map/read MMIO by default,
 - no expanded 16-byte read command exists.
 
 The user-mode client build validates the shared IOCTL header, but does not validate the KMDF driver build.

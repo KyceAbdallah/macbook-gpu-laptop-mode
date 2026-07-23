@@ -1,6 +1,6 @@
-#include "gpuc-readonly.h"
-
 #include <initguid.h>
+
+#include "gpuc-readonly.h"
 
 void GpucSetLastError(
     _In_ PDEVICE_CONTEXT Context,
@@ -109,8 +109,11 @@ NTSTATUS GpucEvtDevicePrepareHardware(
         entry->RawStart = raw->u.Memory.Start;
         entry->TranslatedStart = translated->u.Memory.Start;
         entry->Length = translated->u.Memory.Length;
+        entry->Flags = translated->Flags;
 
-        // Phase 1 maps only resources Windows assigned to this device.
+        // Phase 1 is inventory-only. Do not map or read MMIO unless a later
+        // lab build explicitly opts in at compile time.
+#if defined(GPUC_ENABLE_REPORTED_RESOURCE_READ)
         entry->MappedBase = (volatile UCHAR*)MmMapIoSpaceEx(
             entry->TranslatedStart,
             entry->Length,
@@ -122,6 +125,10 @@ NTSTATUS GpucEvtDevicePrepareHardware(
         }
 
         entry->Mapped = TRUE;
+#else
+        entry->Mapped = FALSE;
+        entry->MappedBase = NULL;
+#endif
     }
 
     return STATUS_SUCCESS;
@@ -139,11 +146,16 @@ NTSTATUS GpucEvtDeviceReleaseHardware(
 
     for (ULONG i = 0; i < context->ResourceCount; ++i) {
         GPUC_RESOURCE_ENTRY* entry = &context->Resources[i];
+#if defined(GPUC_ENABLE_REPORTED_RESOURCE_READ)
         if (entry->Mapped && entry->MappedBase != NULL) {
             MmUnmapIoSpace((PVOID)entry->MappedBase, entry->Length);
             entry->Mapped = FALSE;
             entry->MappedBase = NULL;
         }
+#else
+        entry->Mapped = FALSE;
+        entry->MappedBase = NULL;
+#endif
     }
 
     context->ResourceCount = 0;

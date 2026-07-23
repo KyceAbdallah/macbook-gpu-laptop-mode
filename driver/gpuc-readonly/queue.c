@@ -77,12 +77,17 @@ void GpucEvtIoDeviceControl(
             list.Resources[i].RawStart = context->Resources[i].RawStart.QuadPart;
             list.Resources[i].TranslatedStart = context->Resources[i].TranslatedStart.QuadPart;
             list.Resources[i].Length = context->Resources[i].Length;
+            list.Resources[i].Flags = context->Resources[i].Flags;
         }
         status = GpucCopyToRequest(Request, &list, sizeof(list));
         break;
     }
 
     case IOCTL_GPUC_READ_RESOURCE_BYTES: {
+#if !defined(GPUC_ENABLE_REPORTED_RESOURCE_READ)
+        status = STATUS_NOT_SUPPORTED;
+        break;
+#else
         GPUC_READ_REQUEST* read = NULL;
         status = WdfRequestRetrieveInputBuffer(Request, sizeof(*read), (void**)&read, NULL);
         if (!NT_SUCCESS(status)) {
@@ -117,6 +122,7 @@ void GpucEvtIoDeviceControl(
 
         status = GpucCopyToRequest(Request, &response, sizeof(response));
         break;
+#endif
     }
 
     case IOCTL_GPUC_GET_NOTIFICATION_COUNTERS:

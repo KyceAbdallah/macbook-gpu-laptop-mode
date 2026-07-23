@@ -107,7 +107,7 @@ void PrintUsage() {
     std::wcout << L"Usage:\n";
     std::wcout << L"  gpuc-kmdf-client.exe --version\n";
     std::wcout << L"  gpuc-kmdf-client.exe --resources\n";
-    std::wcout << L"\nPhase 1 has no automatic resource reads.\n";
+    std::wcout << L"\nPhase 1 is inventory-only and has no resource byte-read command.\n";
 }
 
 } // namespace

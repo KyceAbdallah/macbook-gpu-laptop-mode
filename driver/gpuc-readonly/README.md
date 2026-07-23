@@ -13,12 +13,22 @@ Current state:
 - no signed package,
 - no install script,
 - no write IOCTLs,
+- no default MMIO mapping,
+- no default resource byte reads,
 - no mux switching,
 - no EC access,
 - no display adapter enable/disable behavior,
 - no speculative 16-byte Linux-derived read path.
 
-The phase-1 driver policy is to report resources and allow bounded reads only within resources Windows assigns to the device.
+The phase-1 driver policy is inventory-only. It reports resources Windows assigns to the device, but it does not map or read those resources by default.
+
+`IOCTL_GPUC_READ_RESOURCE_BYTES` exists in the shared contract for a later phase, but the scaffold returns `STATUS_NOT_SUPPORTED` unless a future lab build explicitly opts in with:
+
+```text
+GPUC_ENABLE_REPORTED_RESOURCE_READ
+```
+
+Do not define that flag until inventory IOCTLs are validated on a controlled test environment.
 
 ## Target
 

@@ -11,10 +11,15 @@ Default behavior should remain inventory-only. Any resource byte read must requi
 ```powershell
 gpuc-kmdf-client.exe --version
 gpuc-kmdf-client.exe --resources
+```
+
+Later, after inventory IOCTLs are validated in a controlled test environment:
+
+```powershell
 gpuc-kmdf-client.exe --read-reported-resource --index 0 --offset 0 --length 8
 ```
 
-No expanded 16-byte read command is implemented in phase 1.
+No resource byte read command or expanded 16-byte read command is implemented in phase 1.
 
 ## Build
 
