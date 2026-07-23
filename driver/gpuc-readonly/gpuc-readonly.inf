@@ -45,7 +45,7 @@ ServiceBinary=%13%\gpuc-readonly.sys
 KmdfService=gpuc-readonly,GpuC_Wdf
 
 [GpuC_Wdf]
-KmdfLibraryVersion=1.33
+KmdfLibraryVersion=1.15
 
 [Strings]
 ManufacturerName="MacBook GPU Laptop Mode Lab"

@@ -39,6 +39,12 @@ NTSTATUS GpucEvtDeviceAdd(
     WdfDeviceInitSetDeviceType(DeviceInit, FILE_DEVICE_GPUC_READONLY);
     WdfDeviceInitSetIoType(DeviceInit, WdfDeviceIoBuffered);
 
+    DECLARE_CONST_UNICODE_STRING(deviceSddl, L"D:P(A;;GA;;;SY)(A;;GA;;;BA)");
+    NTSTATUS status = WdfDeviceInitAssignSDDLString(DeviceInit, &deviceSddl);
+    if (!NT_SUCCESS(status)) {
+        return status;
+    }
+
     WDF_OBJECT_ATTRIBUTES attributes;
     WDF_OBJECT_ATTRIBUTES_INIT_CONTEXT_TYPE(&attributes, DEVICE_CONTEXT);
 
@@ -51,7 +57,7 @@ NTSTATUS GpucEvtDeviceAdd(
     WdfDeviceInitSetPnpPowerEventCallbacks(DeviceInit, &pnpPowerCallbacks);
 
     WDFDEVICE device;
-    NTSTATUS status = WdfDeviceCreate(&DeviceInit, &attributes, &device);
+    status = WdfDeviceCreate(&DeviceInit, &attributes, &device);
     if (!NT_SUCCESS(status)) {
         return status;
     }

@@ -81,4 +81,13 @@ if ($LASTEXITCODE -ne 0) {
     throw "Driver build failed with exit code $LASTEXITCODE"
 }
 
+$artifact = Join-Path $root "x64\$Configuration\gpuc-readonly.sys"
+if (Test-Path $artifact) {
+    $artifactItem = Get-Item $artifact
+    $artifactHash = Get-FileHash -Algorithm SHA256 $artifact
+    Write-Output ("ArtifactPath: " + $artifactItem.FullName)
+    Write-Output ("ArtifactSizeBytes: " + $artifactItem.Length)
+    Write-Output ("ArtifactSha256: " + $artifactHash.Hash)
+}
+
 Write-Output "Build completed. No install, signing, service creation, or driver load was performed."

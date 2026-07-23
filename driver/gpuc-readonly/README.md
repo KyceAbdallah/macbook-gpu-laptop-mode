@@ -15,6 +15,7 @@ Current state:
 - no write IOCTLs,
 - no default MMIO mapping,
 - no default resource byte reads,
+- administrator/System-only device interface ACL,
 - no mux switching,
 - no EC access,
 - no display adapter enable/disable behavior,
@@ -66,25 +67,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\driver\gpuc-readonly\build
 
 If the WDK driver targets are missing, install the matching WDK/Visual Studio driver workload and rerun `-CheckOnly`.
 
-Current known prerequisite shape on the first lab machine:
+Current known prerequisite shape on the first lab machine after installing the standalone WDK/SDK payload:
 
 ```text
 MSBuild: present
-Windows SDK 10.0.26100.0 user-mode headers/libs: present
+Windows SDK 10.0.28000.0 kernel headers/libs: present
 VS driver platform toolsets: present after installing Windows Driver Kit component
-WDK kernel headers/libs: not present
+WDK KMDF headers/libs: present
 ```
 
-That means the scaffold can be reviewed, but the driver cannot be compiled on that machine until the standalone WDK kit payload is installed. The Visual Studio component can add project/toolset integration without placing `wdf.h` and `WdfDriverEntry.lib` under the Windows Kits tree.
-
-Known missing payload evidence:
-
-```text
-wdf.h
-WdfDriverEntry.lib
-Windows Kits\10\Include\<version>\km
-Windows Kits\10\Lib\<version>\km\x64
-```
+The script auto-detects the newest installed SDK with kernel headers and passes that SDK version to MSBuild.
 
 ## Install Status
 
